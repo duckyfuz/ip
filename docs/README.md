@@ -1,4 +1,4 @@
-# Duke User Guide
+# Clanky User Guide
 
 // Update the title above to match the actual product name
 
