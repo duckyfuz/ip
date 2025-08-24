@@ -5,6 +5,9 @@ public class Clanky {
     static String sep_line = "____________________________________________________________";
     static Scanner clankyScanner = new Scanner(System.in);
 
+    static String[] tasks = new String[100];
+    static int tasksCount = 0;
+
     public static void main(String[] args) {
         System.out.println(sep_line);
         System.out.println("Hello! I'm " + bot_name + ".");
@@ -27,8 +30,24 @@ public class Clanky {
             if (command.equals("bye")) {
                 break;
             }
+            handleCommand(command);
+        }
+    }
+
+    private static void handleCommand(String command) {
+        switch (command) {
+        case "list":
             System.out.println(sep_line);
-            System.out.println(command);
+            for (int i = 0; i < tasksCount; i++) {
+                System.out.println((i+1) + ". " +tasks[i]);
+            }
+            System.out.println(sep_line);
+            break;
+        default:
+            tasks[tasksCount] = command;
+            tasksCount++;
+            System.out.println(sep_line);
+            System.out.println("added: " + command);
             System.out.println(sep_line);
         }
     }
