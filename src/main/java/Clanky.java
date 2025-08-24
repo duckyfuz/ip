@@ -24,7 +24,7 @@ public class Clanky {
         String command;
         while (true) {
             command = clankyScanner.nextLine();
-            if (command.equals("exit")) {
+            if (command.equals("bye")) {
                 break;
             }
             System.out.println(sep_line);
