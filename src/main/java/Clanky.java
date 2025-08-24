@@ -14,28 +14,29 @@ public class Clanky {
         System.out.println("What can I do for you?");
         System.out.println(sep_line);
         executeMainLoop();
-        exitChat();
-    }
-
-    private static void exitChat() {
-        System.out.println(sep_line);
-        System.out.println("Bye! Don't come back.");
-        System.out.println(sep_line);
     }
 
     private static void executeMainLoop() {
         String command;
         while (true) {
             command = clankyScanner.nextLine();
-            if (command.equals("bye")) {
+
+            int status = handleCommand(command);
+            if (status != 0) {
                 break;
             }
-            handleCommand(command);
         }
     }
 
-    private static void handleCommand(String command) {
+    private static int handleCommand(String command) {
+        int status = 0;
         switch (command) {
+        case "bye":
+            status = 1;
+            System.out.println(sep_line);
+            System.out.println("Bye! Don't come back.");
+            System.out.println(sep_line);
+            break;
         case "list":
             System.out.println(sep_line);
             for (int i = 0; i < tasksCount; i++) {
@@ -50,5 +51,6 @@ public class Clanky {
             System.out.println("added: " + command);
             System.out.println(sep_line);
         }
+        return status;
     }
 }
