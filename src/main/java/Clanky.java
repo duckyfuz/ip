@@ -53,7 +53,7 @@ public class Clanky {
             printWithSeparators(allTasks.toString());
             break;
         case "mark":
-            if (taskIndex == -1 || taskIndex >= tasks.length) {
+            if (taskIndex == -1 || taskIndex >= tasksCount) {
                 handleInvalidCommand();
                 break;
             }
@@ -61,7 +61,7 @@ public class Clanky {
             printWithSeparators("Nice! I've marked this task as done:\n" + tasks[taskIndex].getDescriptionWithStatusIcon());
             break;
         case "unmark":
-            if (taskIndex == -1 || taskIndex >= tasks.length) {
+            if (taskIndex == -1 || taskIndex >= tasksCount) {
                 handleInvalidCommand();
                 break;
             }
