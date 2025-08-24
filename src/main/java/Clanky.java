@@ -5,7 +5,7 @@ public class Clanky {
     static String sep_line = "____________________________________________________________";
     static Scanner clankyScanner = new Scanner(System.in);
 
-    static String[] tasks = new String[100];
+    static Task[] tasks = new Task[100];
     static int tasksCount = 0;
 
     public static void main(String[] args) {
@@ -40,12 +40,12 @@ public class Clanky {
         case "list":
             System.out.println(sep_line);
             for (int i = 0; i < tasksCount; i++) {
-                System.out.println((i+1) + ". " +tasks[i]);
+                System.out.println((i + 1) + ". " + tasks[i].getDescriptionWithStatusIcon());
             }
             System.out.println(sep_line);
             break;
         default:
-            tasks[tasksCount] = command;
+            tasks[tasksCount] = new Task(command);
             tasksCount++;
             System.out.println(sep_line);
             System.out.println("added: " + command);
