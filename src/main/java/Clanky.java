@@ -2,17 +2,13 @@ import java.util.Scanner;
 
 public class Clanky {
     static String bot_name = "Clanky";
-    static String sep_line = "____________________________________________________________";
     static Scanner clankyScanner = new Scanner(System.in);
 
     static Task[] tasks = new Task[100];
     static int tasksCount = 0;
 
     public static void main(String[] args) {
-        System.out.println(sep_line);
-        System.out.println("Hello! I'm " + bot_name + ".");
-        System.out.println("What can I do for you?");
-        System.out.println(sep_line);
+        printWithSeparators("Hello! I'm " + bot_name + ".\n" + "What can I do for you?");
         executeMainLoop();
     }
 
@@ -44,16 +40,17 @@ public class Clanky {
         switch (action) {
         case "bye":
             status = 1;
-            System.out.println(sep_line);
-            System.out.println("Bye! Don't come back.");
-            System.out.println(sep_line);
+            printWithSeparators("Bye! Don't come back.");
             break;
         case "list":
-            System.out.println(sep_line);
+            StringBuilder allTasks = new StringBuilder();
             for (int i = 0; i < tasksCount; i++) {
-                System.out.println((i+1) + ". " + tasks[i].getDescriptionWithStatusIcon());
+                allTasks.append((i + 1)).append(". ").append(tasks[i].getDescriptionWithStatusIcon());
+                if (i != tasksCount - 1) {
+                    allTasks.append("\n");
+                }
             }
-            System.out.println(sep_line);
+            printWithSeparators(allTasks.toString());
             break;
         case "mark":
             if (taskIndex == -1 || taskIndex >= tasks.length) {
@@ -61,9 +58,7 @@ public class Clanky {
                 break;
             }
             tasks[taskIndex].markAsDone();
-            System.out.println(sep_line);
-            System.out.println("Nice! I've marked this task as done:\n" + tasks[taskIndex].getDescriptionWithStatusIcon());
-            System.out.println(sep_line);
+            printWithSeparators("Nice! I've marked this task as done:\n" + tasks[taskIndex].getDescriptionWithStatusIcon());
             break;
         case "unmark":
             if (taskIndex == -1 || taskIndex >= tasks.length) {
@@ -71,23 +66,24 @@ public class Clanky {
                 break;
             }
             tasks[taskIndex].markAsNotDone();
-            System.out.println(sep_line);
-            System.out.println("Ok. I've marked this task as not done yet:\n" + tasks[taskIndex].getDescriptionWithStatusIcon());
-            System.out.println(sep_line);
+            printWithSeparators("Ok. I've marked this task as not done yet:\n" + tasks[taskIndex].getDescriptionWithStatusIcon());
             break;
         default:
             tasks[tasksCount] = new Task(command);
             tasksCount++;
-            System.out.println(sep_line);
-            System.out.println("added: " + command);
-            System.out.println(sep_line);
+            printWithSeparators("added: " + command);
         }
         return status;
     }
 
     private static void handleInvalidCommand() {
+        printWithSeparators("I don't understand you and it's your fault. Try again.");
+    }
+
+    private static void printWithSeparators(String line) {
+        String sep_line = "____________________________________________________________";
         System.out.println(sep_line);
-        System.out.println("I don't understand you and it's your fault. Try again.");
+        System.out.println(line);
         System.out.println(sep_line);
     }
 }
