@@ -68,10 +68,23 @@ public class Clanky {
             tasks[taskIndex].markAsNotDone();
             printWithSeparators("Ok. I've marked this task as not done yet:\n" + tasks[taskIndex].toString());
             break;
-        default:
+        case "todo":
             tasks[tasksCount] = new ToDo(command);
             tasksCount++;
             printWithSeparators("added: " + command);
+            break;
+        case "deadline":
+            tasks[tasksCount] = new Deadline(command, "");
+            tasksCount++;
+            printWithSeparators("added: " + command);
+            break;
+        case "event":
+            tasks[tasksCount] = new Event(command, "");
+            tasksCount++;
+            printWithSeparators("added: " + command);
+            break;
+        default:
+            handleInvalidCommand();
         }
         return status;
     }
