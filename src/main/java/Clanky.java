@@ -30,13 +30,6 @@ public class Clanky {
         String[] commandParts = command.split(" ");
         String action = commandParts[0];
 
-        int taskIndex;
-        try {
-            taskIndex = Integer.parseInt(commandParts[1]) - 1;
-        } catch (Throwable t) {
-            taskIndex = -1;
-        }
-
         switch (action) {
         case "bye":
             status = 1;
@@ -53,20 +46,26 @@ public class Clanky {
             printWithSeparators(allTasks.toString());
             break;
         case "mark":
-            if (taskIndex == -1 || taskIndex >= tasksCount) {
-                handleInvalidCommand();
-                break;
-            }
-            tasks[taskIndex].markAsDone();
-            printWithSeparators("Nice! I've marked this task as done:\n" + tasks[taskIndex].toString());
-            break;
         case "unmark":
+            int taskIndex;
+            try {
+                taskIndex = Integer.parseInt(commandParts[1]) - 1;
+            } catch (Throwable t) {
+                taskIndex = -1;
+            }
+            
             if (taskIndex == -1 || taskIndex >= tasksCount) {
                 handleInvalidCommand();
                 break;
             }
-            tasks[taskIndex].markAsNotDone();
-            printWithSeparators("Ok. I've marked this task as not done yet:\n" + tasks[taskIndex].toString());
+
+            if (action.equals("mark")) {
+                tasks[taskIndex].markAsDone();
+                printWithSeparators("Nice! I've marked this task as done:\n" + tasks[taskIndex].toString());
+            } else {
+                tasks[taskIndex].markAsNotDone();
+                printWithSeparators("Ok. I've marked this task as not done yet:\n" + tasks[taskIndex].toString());
+            }
             break;
         case "todo":
             tasks[tasksCount] = new ToDo(command);
