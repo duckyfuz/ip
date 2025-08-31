@@ -45,7 +45,7 @@ public class Clanky {
         case "list":
             StringBuilder allTasks = new StringBuilder();
             for (int i = 0; i < tasksCount; i++) {
-                allTasks.append((i + 1)).append(". ").append(tasks[i].getDescriptionWithStatusIcon());
+                allTasks.append((i + 1)).append(". ").append(tasks[i].toString());
                 if (i != tasksCount - 1) {
                     allTasks.append("\n");
                 }
@@ -58,7 +58,7 @@ public class Clanky {
                 break;
             }
             tasks[taskIndex].markAsDone();
-            printWithSeparators("Nice! I've marked this task as done:\n" + tasks[taskIndex].getDescriptionWithStatusIcon());
+            printWithSeparators("Nice! I've marked this task as done:\n" + tasks[taskIndex].toString());
             break;
         case "unmark":
             if (taskIndex == -1 || taskIndex >= tasksCount) {
@@ -66,7 +66,7 @@ public class Clanky {
                 break;
             }
             tasks[taskIndex].markAsNotDone();
-            printWithSeparators("Ok. I've marked this task as not done yet:\n" + tasks[taskIndex].getDescriptionWithStatusIcon());
+            printWithSeparators("Ok. I've marked this task as not done yet:\n" + tasks[taskIndex].toString());
             break;
         default:
             tasks[tasksCount] = new ToDo(command);
