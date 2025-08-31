@@ -68,19 +68,10 @@ public class Clanky {
             }
             break;
         case "todo":
-            tasks[tasksCount] = new ToDo(parser.detail);
-            tasksCount++;
-            printWithSeparators("added: " + command);
-            break;
         case "deadline":
-            tasks[tasksCount] = new Deadline(parser.detail, parser.dueDate);
-            tasksCount++;
-            printWithSeparators("added: " + command);
-            break;
         case "event":
-            tasks[tasksCount] = new Event(parser.detail, parser.dueDate, parser.endTime);
-            tasksCount++;
-            printWithSeparators("added: " + command);
+            handleAddTask(parser);
+            printWithSeparators("added: " + tasks[tasksCount-1]);
             break;
         default:
             handleInvalidCommand();
@@ -90,6 +81,26 @@ public class Clanky {
 
     private static void handleInvalidCommand() {
         printWithSeparators("I don't understand you and it's your fault. Try again.");
+    }
+
+    private static void handleAddTask(CommandParser parser) {
+        ToDo newTask;
+        switch (parser.action) {
+        case "todo":
+            newTask = new ToDo(parser.detail);
+            break;
+        case "deadline":
+            newTask = new Deadline(parser.detail, parser.dueDate);
+            break;
+        case "event":
+            newTask = new Event(parser.detail, parser.dueDate, parser.endTime);
+            break;
+        default:
+            handleInvalidCommand();
+            return;
+        }
+        tasks[tasksCount] = newTask;
+        tasksCount += 1;
     }
 
     private static void printWithSeparators(String line) {
