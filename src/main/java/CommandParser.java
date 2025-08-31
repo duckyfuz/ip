@@ -34,7 +34,7 @@ public class CommandParser {
                 curAppendingTo = "endTime";
                 break;
             default:
-                taskDetailsMap.put(curAppendingTo, taskDetailsMap.get(curAppendingTo) + " " + curToken);
+                taskDetailsMap.put(curAppendingTo, taskDetailsMap.get(curAppendingTo).isEmpty() ? curToken : taskDetailsMap.get(curAppendingTo) + " " + curToken);
             }
         }
     }
