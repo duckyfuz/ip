@@ -27,10 +27,10 @@ public class Clanky {
     private static int handleCommand(String command) {
         int status = 0;
 
-        String[] commandParts = command.split(" ");
-        String action = commandParts[0];
+        CommandParser parser = new CommandParser(command);
+        parser.parseCommand();
 
-        switch (action) {
+        switch (parser.action) {
         case "bye":
             status = 1;
             printWithSeparators("Bye! Don't come back.");
@@ -49,17 +49,17 @@ public class Clanky {
         case "unmark":
             int taskIndex;
             try {
-                taskIndex = Integer.parseInt(commandParts[1]) - 1;
+                taskIndex = Integer.parseInt(parser.taskDetailsMap.get("description")) - 1;
             } catch (Throwable t) {
                 taskIndex = -1;
             }
-            
+
             if (taskIndex == -1 || taskIndex >= tasksCount) {
                 handleInvalidCommand();
                 break;
             }
 
-            if (action.equals("mark")) {
+            if (parser.action.equals("mark")) {
                 tasks[taskIndex].markAsDone();
                 printWithSeparators("Nice! I've marked this task as done:\n" + tasks[taskIndex].toString());
             } else {
