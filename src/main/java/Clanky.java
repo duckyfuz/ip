@@ -36,6 +36,10 @@ public class Clanky {
             printWithSeparators("Bye! Don't come back.");
             break;
         case "list":
+            if (tasksCount == 0) {
+                printWithSeparators("No tasks! Go touch grass.");
+                break;
+            }
             StringBuilder allTasks = new StringBuilder();
             for (int i = 0; i < tasksCount; i++) {
                 allTasks.append((i + 1)).append(". ").append(tasks[i].toString());
