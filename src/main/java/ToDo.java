@@ -1,39 +1,19 @@
-public class ToDo {
-    protected String description;
-    protected boolean isDone;
-
+public class ToDo extends Task {
     public ToDo() {
-        this.description = "";
-        this.isDone = false;
+        super();
     }
 
     public ToDo(String description) {
-        this.description = description;
-        this.isDone = false;
+        super(description);
     }
 
+    @Override
     public String getTypeIcon() {
         return "[T]";
     }
 
-    public String getStatusIcon() {
-        return "[" + (isDone ? "X" : " ") + "]"; // mark done task with X
-    }
-
-    public String getAdditionalDetails() {
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return (getTypeIcon() + getStatusIcon() + " " + description + getAdditionalDetails());
-    }
-
-    public void markAsDone() {
-        isDone = true;
-    }
-
-    public void markAsNotDone() {
-        isDone = false;
-    }
+//    @Override
+//    public String getAdditionalDetails() {
+//        return "";
+//    }
 }

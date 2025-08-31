@@ -4,7 +4,7 @@ public class Clanky {
     static String bot_name = "Clanky";
     static Scanner clankyScanner = new Scanner(System.in);
 
-    static ToDo[] tasks = new ToDo[100];
+    static Task[] tasks = new Task[100];
     static int tasksCount = 0;
 
     public static void main(String[] args) {
@@ -84,7 +84,7 @@ public class Clanky {
     }
 
     private static void handleAddTask(CommandParser parser) {
-        ToDo newTask;
+        Task newTask;
         switch (parser.action) {
         case "todo":
             newTask = new ToDo(parser.detail);
