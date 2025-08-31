@@ -47,15 +47,19 @@ public class CommandParser {
     private void handleAppendingContent (String newContent) {
         switch (curContext) {
         case "description":
+            if (!detail.isEmpty()) detail += " ";
             detail += newContent;
             break;
         case "dueDate":
+            if (!dueDate.isEmpty()) dueDate += " ";
             dueDate += newContent;
             break;
         case "startTime":
+            if (!startTime.isEmpty()) startTime += " ";
             startTime += newContent;
             break;
         case "endTime":
+            if (!endTime.isEmpty()) endTime += " ";
             endTime += newContent;
             break;
         default:
