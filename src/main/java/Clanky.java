@@ -71,7 +71,7 @@ public class Clanky {
         case "deadline":
         case "event":
             handleAddTask(parser);
-            printWithSeparators("added: " + tasks[tasksCount-1]);
+            printWithSeparators("added: " + tasks[tasksCount-1] + "\nNow you have " + tasksCount + " tasks.");
             break;
         default:
             handleInvalidCommand();
