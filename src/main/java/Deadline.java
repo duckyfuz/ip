@@ -10,4 +10,9 @@ public class Deadline extends ToDo {
         super(description);
         this.dueDate = dueDate;
     }
+
+    @Override
+    public String getTypeIcon() {
+        return "[D]";
+    }
 }

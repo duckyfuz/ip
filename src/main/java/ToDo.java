@@ -12,13 +12,17 @@ public class ToDo {
         this.isDone = false;
     }
 
+    public String getTypeIcon() {
+        return "[T]";
+    }
+
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return "[" + (isDone ? "X" : " ") + "]"; // mark done task with X
     }
 
     @Override
     public String toString() {
-        return ("[" + getStatusIcon() + "] " + description);
+        return (getTypeIcon() + getStatusIcon() + " " + description);
     }
 
     public void markAsDone() {

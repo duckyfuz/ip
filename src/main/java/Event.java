@@ -10,4 +10,9 @@ public class Event extends ToDo {
         super(description);
         this.duration = duration;
     }
+
+    @Override
+    public String getTypeIcon() {
+        return "[E]";
+    }
 }
