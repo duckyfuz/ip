@@ -4,7 +4,7 @@ public class Clanky {
     static String bot_name = "Clanky";
     static Scanner clankyScanner = new Scanner(System.in);
 
-    static Task[] tasks = new Task[100];
+    static ToDo[] tasks = new ToDo[100];
     static int tasksCount = 0;
 
     public static void main(String[] args) {
@@ -69,7 +69,7 @@ public class Clanky {
             printWithSeparators("Ok. I've marked this task as not done yet:\n" + tasks[taskIndex].getDescriptionWithStatusIcon());
             break;
         default:
-            tasks[tasksCount] = new Task(command);
+            tasks[tasksCount] = new ToDo(command);
             tasksCount++;
             printWithSeparators("added: " + command);
         }
