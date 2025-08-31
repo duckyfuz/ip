@@ -1,14 +1,17 @@
 public class Event extends ToDo {
-    protected String duration;
+    protected String startTime;
+    protected String endTime;
 
     public Event() {
         super();
-        duration = "";
+        startTime = "";
+        endTime = "";
     }
 
-    public Event(String description, String duration) {
+    public Event(String description, String startTime, String endTime) {
         super(description);
-        this.duration = duration;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override

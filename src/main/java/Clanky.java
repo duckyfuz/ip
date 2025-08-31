@@ -49,7 +49,7 @@ public class Clanky {
         case "unmark":
             int taskIndex;
             try {
-                taskIndex = Integer.parseInt(parser.taskDetailsMap.get("description")) - 1;
+                taskIndex = Integer.parseInt(parser.detail) - 1;
             } catch (Throwable t) {
                 taskIndex = -1;
             }
@@ -68,17 +68,17 @@ public class Clanky {
             }
             break;
         case "todo":
-            tasks[tasksCount] = new ToDo(command);
+            tasks[tasksCount] = new ToDo(parser.detail);
             tasksCount++;
             printWithSeparators("added: " + command);
             break;
         case "deadline":
-            tasks[tasksCount] = new Deadline(command, "");
+            tasks[tasksCount] = new Deadline(parser.detail, parser.dueDate);
             tasksCount++;
             printWithSeparators("added: " + command);
             break;
         case "event":
-            tasks[tasksCount] = new Event(command, "");
+            tasks[tasksCount] = new Event(parser.detail, parser.dueDate, parser.endTime);
             tasksCount++;
             printWithSeparators("added: " + command);
             break;
