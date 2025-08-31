@@ -2,6 +2,11 @@ public class ToDo {
     protected String description;
     protected boolean isDone;
 
+    public ToDo() {
+        this.description = "";
+        this.isDone = false;
+    }
+
     public ToDo(String description) {
         this.description = description;
         this.isDone = false;
