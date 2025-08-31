@@ -20,9 +20,13 @@ public class ToDo {
         return "[" + (isDone ? "X" : " ") + "]"; // mark done task with X
     }
 
+    public String getAdditionalDetails() {
+        return "";
+    }
+
     @Override
     public String toString() {
-        return (getTypeIcon() + getStatusIcon() + " " + description);
+        return (getTypeIcon() + getStatusIcon() + " " + description + getAdditionalDetails());
     }
 
     public void markAsDone() {

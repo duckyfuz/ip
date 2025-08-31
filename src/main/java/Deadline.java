@@ -15,4 +15,9 @@ public class Deadline extends ToDo {
     public String getTypeIcon() {
         return "[D]";
     }
+
+    @Override
+    public String getAdditionalDetails() {
+        return " (by: " + dueDate + ")";
+    }
 }

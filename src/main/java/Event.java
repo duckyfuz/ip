@@ -18,4 +18,9 @@ public class Event extends ToDo {
     public String getTypeIcon() {
         return "[E]";
     }
+
+    @Override
+    public String getAdditionalDetails() {
+        return " (from: " + startTime + " to: " + endTime + ")";
+    }
 }
