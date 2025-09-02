@@ -39,9 +39,9 @@ public class Clanky {
                 break;
             }
             StringBuilder allTasks = new StringBuilder();
-            for (int i = 0; i < taskManager.tasksCount; i++) {
-                allTasks.append((i + 1)).append(". ").append(taskManager.tasks[i].toString());
-                if (i != taskManager.tasksCount - 1) {
+            for (int i = 1; i <= taskManager.size(); i++) {
+                allTasks.append((i)).append(". ").append(taskManager.getTask(i));
+                if (i != taskManager.size()) {
                     allTasks.append("\n");
                 }
             }
@@ -49,31 +49,31 @@ public class Clanky {
             break;
         case "mark":
         case "unmark":
-            int taskIndex;
+            int userFriendlyIndex;  // one-based indexing
             try {
-                taskIndex = Integer.parseInt(parser.detail) - 1;
+                userFriendlyIndex = Integer.parseInt(parser.detail);
             } catch (Throwable t) {
-                taskIndex = -1;
+                userFriendlyIndex = -1;
             }
 
-            if (taskIndex == -1 || taskIndex >= taskManager.tasksCount) {
+            if (userFriendlyIndex == -1 || userFriendlyIndex - 1 >= taskManager.size()) {
                 handleInvalidCommand();
                 break;
             }
 
             if (parser.action.equals("mark")) {
-                taskManager.tasks[taskIndex].markAsDone();
-                printWithSeparators("Nice! I've marked this task as done:\n" + taskManager.tasks[taskIndex].toString());
+                taskManager.getTask(userFriendlyIndex).markAsDone();
+                printWithSeparators("Nice! I've marked this task as done:\n" + taskManager.getTask(userFriendlyIndex));
             } else {
-                taskManager.tasks[taskIndex].markAsNotDone();
-                printWithSeparators("Ok. I've marked this task as not done yet:\n" + taskManager.tasks[taskIndex].toString());
+                taskManager.getTask(userFriendlyIndex).markAsNotDone();
+                printWithSeparators("Ok. I've marked this task as not done yet:\n" + taskManager.getTask(userFriendlyIndex));
             }
             break;
         case "todo":
         case "deadline":
         case "event":
             handleAddTask(parser);
-            printWithSeparators("added: " + taskManager.tasks[taskManager.tasksCount - 1] + "\nNow you have " + taskManager.tasksCount + " tasks.");
+            printWithSeparators("added: " + taskManager.getLatestTask() + "\nNow you have " + taskManager.size() + " tasks.");
             break;
         default:
             handleInvalidCommand();
@@ -101,8 +101,7 @@ public class Clanky {
             handleInvalidCommand();
             return;
         }
-        taskManager.tasks[taskManager.tasksCount] = newTask;
-        taskManager.tasksCount += 1;
+        taskManager.addTask(newTask);
     }
 
     private static void printWithSeparators(String line) {
