@@ -95,7 +95,7 @@ public class Clanky {
             newTask = new Deadline(parser.detail, parser.dueDate);
             break;
         case "event":
-            newTask = new Event(parser.detail, parser.dueDate, parser.endTime);
+            newTask = new Event(parser.detail, parser.startTime, parser.endTime);
             break;
         default:
             handleInvalidCommand();

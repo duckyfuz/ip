@@ -17,13 +17,13 @@ added: [D][ ] return book (by: Sunday)
 Now you have 2 tasks.
 ____________________________________________________________
 ____________________________________________________________
-added: [E][ ] project meeting (from:  to: 4pm)
+added: [E][ ] project meeting (from: Mon 2pm to: 4pm)
 Now you have 3 tasks.
 ____________________________________________________________
 ____________________________________________________________
 1. [T][ ] borrow book
 2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (from:  to: 4pm)
+3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -32,16 +32,16 @@ ____________________________________________________________
 ____________________________________________________________
 1. [T][X] borrow book
 2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (from:  to: 4pm)
+3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-[E][X] project meeting (from:  to: 4pm)
+[E][X] project meeting (from: Mon 2pm to: 4pm)
 ____________________________________________________________
 ____________________________________________________________
 1. [T][X] borrow book
 2. [D][ ] return book (by: Sunday)
-3. [E][X] project meeting (from:  to: 4pm)
+3. [E][X] project meeting (from: Mon 2pm to: 4pm)
 ____________________________________________________________
 ____________________________________________________________
 Ok. I've marked this task as not done yet:
@@ -50,7 +50,7 @@ ____________________________________________________________
 ____________________________________________________________
 1. [T][ ] borrow book
 2. [D][ ] return book (by: Sunday)
-3. [E][X] project meeting (from:  to: 4pm)
+3. [E][X] project meeting (from: Mon 2pm to: 4pm)
 ____________________________________________________________
 ____________________________________________________________
 I don't understand you and it's your fault. Try again.
