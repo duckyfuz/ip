@@ -9,6 +9,10 @@ import clanky.errors.MissingEndTimeException;
 import clanky.errors.MissingStartTimeException;
 import clanky.errors.NonExistantTaskError;
 import clanky.errors.UnknownCommandException;
+import clanky.tasks.Deadline;
+import clanky.tasks.Event;
+import clanky.tasks.Task;
+import clanky.tasks.ToDo;
 
 public class Clanky {
     static String bot_name = "Clanky";

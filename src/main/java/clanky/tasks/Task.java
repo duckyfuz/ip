@@ -1,4 +1,4 @@
-package clanky;
+package clanky.tasks;
 
 public abstract class Task {
     protected String description;

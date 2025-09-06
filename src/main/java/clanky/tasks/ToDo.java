@@ -1,4 +1,4 @@
-package clanky;
+package clanky.tasks;
 
 public class ToDo extends Task {
     public ToDo() {

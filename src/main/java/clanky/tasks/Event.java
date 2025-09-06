@@ -1,4 +1,4 @@
-package clanky;
+package clanky.tasks;
 
 public class Event extends Task {
     protected String startTime;

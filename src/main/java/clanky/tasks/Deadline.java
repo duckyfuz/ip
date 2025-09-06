@@ -1,4 +1,4 @@
-package clanky;
+package clanky.tasks;
 
 public class Deadline extends Task {
     protected String dueDate;
