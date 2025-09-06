@@ -11,4 +11,10 @@ list
 unmark 1
 list
 mark 4
+todo
+deadline missing deadline task
+event missing both times
+event missing start time /to 4pm
+event missing end time /from Mon 2pm
+unknowncommandhere
 bye
