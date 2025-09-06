@@ -15,14 +15,30 @@ public class Clanky {
         while (true) {
             command = clankyScanner.nextLine().trim();
 
-            int status = handleCommand(command);
-            if (status != 0) {
-                break;
+            try {
+                int status = handleCommand(command);
+                if (status != 0) {
+                    break;
+                }
+            } catch (UnknownCommandException e) {
+                printWithSeparators("I don't understand you and it's your fault. Try again with a valid command.");
+            } catch (NonExistantTaskError e) {
+                printWithSeparators("That task does not exist. Learn to count before trying again.");
+            } catch (MissingDetailException e) {
+                printWithSeparators("You're missing some details. Add them before trying again.");
+            } catch (MissingDueDateException e) {
+                printWithSeparators("You're missing your due date. Add your due date after a /by flag.");
+            } catch (MissingStartTimeException e) {
+                printWithSeparators("You're missing your start time. Add your start time after a /from flag.");
+            } catch (MissingEndTimeException e) {
+                printWithSeparators("You're missing your end time. Add your end time after a /to flag.");
+            } catch (ClankyException e) {
+                printWithSeparators("I have no idea what you did wrong, but you did something wrong.");
             }
         }
     }
 
-    private static int handleCommand(String command) {
+    private static int handleCommand(String command) throws ClankyException {
         int status = 0;
 
         CommandParser parser = new CommandParser(command);
@@ -57,8 +73,7 @@ public class Clanky {
             }
 
             if (userFriendlyIndex == -1 || userFriendlyIndex - 1 >= taskManager.size()) {
-                handleInvalidCommand();
-                break;
+                throw new NonExistantTaskError();
             }
 
             if (parser.action.equals("mark")) {
@@ -76,30 +91,36 @@ public class Clanky {
             printWithSeparators("added: " + taskManager.getLatestTask() + "\nNow you have " + taskManager.size() + " tasks.");
             break;
         default:
-            handleInvalidCommand();
+            throw new UnknownCommandException();
         }
         return status;
     }
 
-    private static void handleInvalidCommand() {
-        printWithSeparators("I don't understand you and it's your fault. Try again.");
-    }
-
-    private static void handleAddTask(CommandParser parser) {
+    private static void handleAddTask(CommandParser parser) throws ClankyException {
+        if (parser.detail.isEmpty()) {
+            throw new MissingDetailException();
+        }
         Task newTask;
         switch (parser.action) {
         case "todo":
             newTask = new ToDo(parser.detail);
             break;
         case "deadline":
+            if (parser.dueDate.isEmpty()) {
+                throw new MissingDueDateException();
+            }
             newTask = new Deadline(parser.detail, parser.dueDate);
             break;
         case "event":
+            if (parser.startTime.isEmpty()) {
+                throw new MissingStartTimeException();
+            } else if (parser.endTime.isEmpty()) {
+                throw new MissingEndTimeException();
+            }
             newTask = new Event(parser.detail, parser.startTime, parser.endTime);
             break;
         default:
-            handleInvalidCommand();
-            return;
+            throw new UnknownCommandException();
         }
         taskManager.addTask(newTask);
     }
