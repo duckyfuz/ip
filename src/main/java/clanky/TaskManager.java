@@ -1,3 +1,5 @@
+package clanky;
+
 public class TaskManager {
     private Task[] tasks;
     private int tasksCount = 0;

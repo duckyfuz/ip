@@ -1,3 +1,5 @@
+package clanky;
+
 import java.util.Set;
 
 public class CommandParser {

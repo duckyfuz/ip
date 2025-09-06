@@ -1,12 +1,14 @@
+package clanky;
+
 import java.util.Scanner;
 
-import errors.ClankyException;
-import errors.MissingDetailException;
-import errors.MissingDueDateException;
-import errors.MissingEndTimeException;
-import errors.MissingStartTimeException;
-import errors.NonExistantTaskError;
-import errors.UnknownCommandException;
+import clanky.errors.ClankyException;
+import clanky.errors.MissingDetailException;
+import clanky.errors.MissingDueDateException;
+import clanky.errors.MissingEndTimeException;
+import clanky.errors.MissingStartTimeException;
+import clanky.errors.NonExistantTaskError;
+import clanky.errors.UnknownCommandException;
 
 public class Clanky {
     static String bot_name = "Clanky";
