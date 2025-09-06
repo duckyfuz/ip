@@ -1,5 +1,13 @@
 import java.util.Scanner;
 
+import errors.ClankyException;
+import errors.MissingDetailException;
+import errors.MissingDueDateException;
+import errors.MissingEndTimeException;
+import errors.MissingStartTimeException;
+import errors.NonExistantTaskError;
+import errors.UnknownCommandException;
+
 public class Clanky {
     static String bot_name = "Clanky";
     static Scanner clankyScanner = new Scanner(System.in);
