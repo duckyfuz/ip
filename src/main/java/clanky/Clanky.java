@@ -80,7 +80,6 @@ public class Clanky {
         case "mark":
         case "unmark":
         case "delete":
-            System.out.println(parser.action);
             int userFriendlyIndex;  // one-based indexing
             try {
                 userFriendlyIndex = Integer.parseInt(parser.detail);
