@@ -20,7 +20,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Clanky < input.txt > ACTUAL.TXT
+java -classpath ../bin clanky.Clanky < input.txt > ACTUAL.TXT
 
 # convert to UNIX format (didn't have a need to do so on mac)
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
