@@ -1,35 +1,57 @@
 #!/usr/bin/env bash
 
-# create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
     mkdir ../bin
 fi
 
-# delete output from previous run
-if [ -e "./ACTUAL.TXT" ]
+if [ -e "./ACTUAL1.TXT" ]
 then
-    rm ACTUAL.TXT
+    rm ACTUAL1.TXT
 fi
 
-# compile the code into the bin folder, terminates if error occurred
+if [ -e "./ACTUAL2.TXT" ]
+then
+    rm ACTUAL2.TXT
+fi
+
+if [ -e "./tasks.txt" ]
+then
+    rm tasks.txt
+fi
+
 if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/clanky/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
-# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Clanky < input.txt > ACTUAL.TXT
+# First run: Create tasks and write to tasks.txt
+java -classpath ../bin clanky.Clanky < input1.txt > ACTUAL1.TXT
 
-# convert to UNIX format (didn't have a need to do so on mac)
-cp EXPECTED.TXT EXPECTED-UNIX.TXT
-#dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
+# Ensure persisted data is present
+if [ ! -e "tasks.txt" ]; then
+    echo "********** PERSISTENCE FAILURE **********"
+    exit 1
+fi
 
-# compare the output to the expected output
-diff ACTUAL.TXT EXPECTED.TXT
-if [ $? -eq 0 ]
-then
+# Second run: Load tasks from tasks.txt and check against expected output
+java -classpath ../bin clanky.Clanky < input2.txt > ACTUAL2.TXT
+
+# Convert to UNIX format (if necessary on your platform)
+cp EXPECTED1.TXT EXPECTED1-UNIX.TXT
+cp EXPECTED2.TXT EXPECTED2-UNIX.TXT
+# dos2unix ACTUAL1.TXT EXPECTED1-UNIX.TXT
+# dos2unix ACTUAL2.TXT EXPECTED2-UNIX.TXT
+
+# Compare the output to the expected output for both runs
+diff ACTUAL1.TXT EXPECTED1.TXT
+result1=$?
+
+diff ACTUAL2.TXT EXPECTED2.TXT
+result2=$?
+
+if [ $result1 -eq 0 ] && [ $result2 -eq 0 ]; then
     echo "Test result: PASSED"
     exit 0
 else
