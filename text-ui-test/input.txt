@@ -17,4 +17,6 @@ event missing both times
 event missing start time /to 4pm
 event missing end time /from Mon 2pm
 unknowncommandhere
+delete 1
+delete 100
 bye
