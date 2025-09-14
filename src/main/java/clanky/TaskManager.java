@@ -29,4 +29,8 @@ public class TaskManager {
     public void addTask(Task task) {
         tasks.add(task);
     }
+
+    public void removeTask(int index) {
+        tasks.remove(index - 1);  // note that this is also one-based indexing
+    }
 }

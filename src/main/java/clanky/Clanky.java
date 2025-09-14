@@ -79,6 +79,8 @@ public class Clanky {
             break;
         case "mark":
         case "unmark":
+        case "delete":
+            System.out.println(parser.action);
             int userFriendlyIndex;  // one-based indexing
             try {
                 userFriendlyIndex = Integer.parseInt(parser.detail);
@@ -93,9 +95,15 @@ public class Clanky {
             if (parser.action.equals("mark")) {
                 taskManager.getTask(userFriendlyIndex).markAsDone();
                 printWithSeparators("Nice! I've marked this task as done:\n" + taskManager.getTask(userFriendlyIndex));
-            } else {
+            } else if (parser.action.equals("unmark")) {
                 taskManager.getTask(userFriendlyIndex).markAsNotDone();
                 printWithSeparators("Ok. I've marked this task as not done yet:\n" + taskManager.getTask(userFriendlyIndex));
+            } else if (parser.action.equals("delete")) {
+                Task deletedTask = taskManager.getTask(userFriendlyIndex);
+                taskManager.removeTask(userFriendlyIndex);
+                printWithSeparators("Can. I've removed this task:\n" + deletedTask);
+            } else {
+                throw new UnknownCommandException();
             }
             break;
         case "todo":
