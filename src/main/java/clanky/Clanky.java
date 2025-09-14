@@ -18,10 +18,13 @@ public class Clanky {
     static String bot_name = "Clanky";
     static Scanner clankyScanner = new Scanner(System.in);
     static TaskManager taskManager = new TaskManager(100);
+    static PersistenceManager persMan = new PersistenceManager(taskManager);
 
     public static void main(String[] args) {
         printWithSeparators("Hello! I'm " + bot_name + ".\n" + "What can I do for you?");
+        persMan.loadData();
         executeMainLoop();
+        persMan.storeData();
     }
 
     private static void executeMainLoop() {
