@@ -17,7 +17,7 @@ import clanky.tasks.ToDo;
 public class Clanky {
     static String bot_name = "Clanky";
     static Scanner clankyScanner = new Scanner(System.in);
-    static TaskManager taskManager = new TaskManager(100);
+    static TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
         printWithSeparators("Hello! I'm " + bot_name + ".\n" + "What can I do for you?");

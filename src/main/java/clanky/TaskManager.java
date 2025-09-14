@@ -1,32 +1,32 @@
 package clanky;
 
+import java.util.ArrayList;
 import clanky.tasks.Task;
 
 public class TaskManager {
-    private Task[] tasks;
-    private int tasksCount = 0;
+    private ArrayList<Task> tasks;
 
-    TaskManager(int maxTasks) {
-        tasks = new Task[maxTasks];
+    TaskManager() {
+        tasks = new ArrayList<>();
     }
 
     public boolean isEmpty() {
-        return tasksCount == 0;
+        return tasks.isEmpty();
     }
 
     public int size() {
-        return tasksCount;
+        return tasks.size();
     }
 
     public Task getLatestTask() {
-        return tasks[tasksCount - 1];
+        return tasks.get(size() - 1);
     }
 
     public Task getTask(int index) {
-        return tasks[index - 1];  // note that we use one-based indexing here
+        return tasks.get(index - 1);  // note that we use one-based indexing here
     }
 
     public void addTask(Task task) {
-        tasks[tasksCount++] = task;
+        tasks.add(task);
     }
 }
