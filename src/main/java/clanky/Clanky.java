@@ -14,12 +14,25 @@ import clanky.tasks.Event;
 import clanky.tasks.Task;
 import clanky.tasks.ToDo;
 
+/**
+ * Main class for the Clanky task management application. 
+ * Clanky is a command-line interface chatbot that allows users to manage their tasks.
+ * It supports adding todos, deadlines, and events, as well as marking tasks as done/undone,
+ * listing tasks, and deleting tasks. Data persistence is handled automatically.
+ */
 public class Clanky {
     static String bot_name = "Clanky";
     static Scanner clankyScanner = new Scanner(System.in);
     static TaskManager taskManager = new TaskManager();
     static PersistenceManager persMan = new PersistenceManager(taskManager);
 
+    /**
+     * Main entry point for the Clanky application.
+     * Initializes the application, loads existing data, runs the main command loop,
+     * and saves data before exiting.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         printWithSeparators("Hello! I'm " + bot_name + ".\n" + "What can I do for you?");
         persMan.loadData();
@@ -27,6 +40,11 @@ public class Clanky {
         persMan.storeData();
     }
 
+    /**
+     * Executes the main command processing loop.
+     * Continuously reads user input, parses commands, and handles exceptions.
+     * Loop continues until a bye command is received.
+     */
     private static void executeMainLoop() {
         String command;
         while (true) {
@@ -55,6 +73,14 @@ public class Clanky {
         }
     }
 
+    /**
+     * Handles a single command from the user.
+     * Parses the command and executes the appropriate action (list, mark, unmark, delete, or add tasks).
+     *
+     * @param command The raw command string input by the user.
+     * @return Status code: 0 to continue, 1 to exit the application.
+     * @throws ClankyException If there is an error processing the command.
+     */
     private static int handleCommand(String command) throws ClankyException {
         int status = 0;
 
@@ -120,6 +146,13 @@ public class Clanky {
         return status;
     }
 
+    /**
+     * Handles adding a new task based on the parsed command.
+     * Creates the appropriate task type (ToDo, Deadline, or Event) and adds it to the task manager.
+     *
+     * @param parser The CommandParser containing the parsed command details.
+     * @throws ClankyException If required task details are missing or the command is invalid.
+     */
     private static void handleAddTask(CommandParser parser) throws ClankyException {
         if (parser.detail.isEmpty()) {
             throw new MissingDetailException();
@@ -149,6 +182,12 @@ public class Clanky {
         taskManager.addTask(newTask);
     }
 
+    /**
+     * Prints a message to the console with decorative separator lines.
+     * Used to format all output from the Clanky application.
+     *
+     * @param line The message to print between separator lines.
+     */
     private static void printWithSeparators(String line) {
         String sep_line = "____________________________________________________________";
         System.out.println(sep_line);
