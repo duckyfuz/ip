@@ -72,4 +72,46 @@ public class TaskList {
     public void removeTask(int index) {
         tasks.remove(index - 1);  // note that this is also one-based indexing
     }
+
+    /**
+     * Finds all tasks that contain the specified keyword in their description.
+     * The search is case-insensitive.
+     *
+     * @param keyword The keyword to search for in task descriptions.
+     * @return An ArrayList of tasks that match the search criteria.
+     */
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
+    /**
+     * Finds all tasks that contain the specified keyword and returns them with their indices.
+     * The search is case-insensitive.
+     *
+     * @param keyword The keyword to search for in task descriptions.
+     * @return A formatted string with matching tasks and their indices.
+     */
+    public String findTasksWithIndices(String keyword) {
+        StringBuilder result = new StringBuilder();
+        boolean foundAny = false;
+        
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                if (foundAny) {
+                    result.append("\n");
+                }
+                result.append((i + 1)).append(".").append(task.toString());
+                foundAny = true;
+            }
+        }
+        
+        return result.toString();
+    }
 }

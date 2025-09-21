@@ -45,6 +45,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns the description of this task.
+     *
+     * @return The task description.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Returns additional details specific to the task type.
      * Default implementation returns an empty string.
      * Can be overridden by subclasses to provide type-specific information.
