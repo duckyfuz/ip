@@ -2,6 +2,11 @@ package clanky;
 
 import java.util.Set;
 
+/**
+ * Parses user commands and extracts relevant information for task management.
+ * Supports parsing commands with flags like /by, /from, and /to for specifying 
+ * due dates, start times, and end times respectively.
+ */
 public class CommandParser {
     private final String command;
 
@@ -13,10 +18,19 @@ public class CommandParser {
 
     private String curContext = "description";
 
+    /**
+     * Constructs a CommandParser with the given command string.
+     *
+     * @param command The raw command string to be parsed.
+     */
     CommandParser (String command) {
         this.command = command;
     }
 
+    /**
+     * Parses the command string and populates the action and detail fields.
+     * Recognizes context-switching flags (/by, /from, /to) and handles content appropriately.
+     */
     public void parseCommand() {
         String[] parts = command.split(" ");
         action = parts[0];
@@ -32,6 +46,12 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Handles switching the current parsing context based on flag tokens.
+     * Changes where subsequent content will be stored.
+     *
+     * @param newContextFlag The flag indicating the new context (/by, /from, or /to).
+     */
     private void handleContextSwitch (String newContextFlag) {
         switch (newContextFlag) {
         case "/by":
@@ -46,6 +66,12 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Appends content to the appropriate field based on the current parsing context.
+     * Adds spaces between words when appending to existing content.
+     *
+     * @param newContent The content token to append to the current context field.
+     */
     private void handleAppendingContent (String newContent) {
         switch (curContext) {
         case "description":
