@@ -1,7 +1,5 @@
 package clanky;
 
-import java.util.Scanner;
-
 import clanky.errors.ClankyException;
 import clanky.errors.MissingDetailException;
 import clanky.errors.MissingDueDateException;
@@ -21,10 +19,10 @@ import clanky.tasks.ToDo;
  * listing tasks, and deleting tasks. Data persistence is handled automatically.
  */
 public class Clanky {
-    static String bot_name = "Clanky";
-    static Scanner clankyScanner = new Scanner(System.in);
-    static TaskManager taskManager = new TaskManager();
-    static PersistenceManager persMan = new PersistenceManager(taskManager);
+    private static final String BOT_NAME = "Clanky";
+    private static TaskManager taskManager = new TaskManager();
+    private static PersistenceManager persMan = new PersistenceManager(taskManager);
+    private static Ui ui = new Ui(BOT_NAME);
 
     /**
      * Main entry point for the Clanky application.
@@ -34,7 +32,7 @@ public class Clanky {
      * @param args Command line arguments (not used).
      */
     public static void main(String[] args) {
-        printWithSeparators("Hello! I'm " + bot_name + ".\n" + "What can I do for you?");
+        ui.showWelcome();
         persMan.loadData();
         executeMainLoop();
         persMan.storeData();
@@ -48,27 +46,15 @@ public class Clanky {
     private static void executeMainLoop() {
         String command;
         while (true) {
-            command = clankyScanner.nextLine().trim();
+            command = ui.readCommand();
 
             try {
                 int status = handleCommand(command);
                 if (status != 0) {
                     break;
                 }
-            } catch (UnknownCommandException e) {
-                printWithSeparators("I don't understand you and it's your fault. Try again with a valid command.");
-            } catch (NonExistantTaskError e) {
-                printWithSeparators("That task does not exist. Learn to count before trying again.");
-            } catch (MissingDetailException e) {
-                printWithSeparators("You're missing some details. Add them before trying again.");
-            } catch (MissingDueDateException e) {
-                printWithSeparators("You're missing your due date. Add your due date after a /by flag.");
-            } catch (MissingStartTimeException e) {
-                printWithSeparators("You're missing your start time. Add your start time after a /from flag.");
-            } catch (MissingEndTimeException e) {
-                printWithSeparators("You're missing your end time. Add your end time after a /to flag.");
             } catch (ClankyException e) {
-                printWithSeparators("I have no idea what you did wrong, but you did something wrong.");
+                ui.showError(e);
             }
         }
     }
@@ -90,11 +76,11 @@ public class Clanky {
         switch (parser.action) {
         case "bye":
             status = 1;
-            printWithSeparators("Bye! Don't come back.");
+            ui.showGoodbye();
             break;
         case "list":
             if (taskManager.isEmpty()) {
-                printWithSeparators("No tasks! Go touch grass.");
+                ui.showEmptyTaskList();
                 break;
             }
             StringBuilder allTasks = new StringBuilder();
@@ -104,7 +90,7 @@ public class Clanky {
                     allTasks.append("\n");
                 }
             }
-            printWithSeparators(allTasks.toString());
+            ui.showTaskList(allTasks.toString());
             break;
         case "mark":
         case "unmark":
@@ -122,14 +108,14 @@ public class Clanky {
 
             if (parser.action.equals("mark")) {
                 taskManager.getTask(userFriendlyIndex).markAsDone();
-                printWithSeparators("Nice! I've marked this task as done:\n" + taskManager.getTask(userFriendlyIndex));
+                ui.showTaskMarkedDone(taskManager.getTask(userFriendlyIndex).toString());
             } else if (parser.action.equals("unmark")) {
                 taskManager.getTask(userFriendlyIndex).markAsNotDone();
-                printWithSeparators("Ok. I've marked this task as not done yet:\n" + taskManager.getTask(userFriendlyIndex));
+                ui.showTaskMarkedNotDone(taskManager.getTask(userFriendlyIndex).toString());
             } else if (parser.action.equals("delete")) {
                 Task deletedTask = taskManager.getTask(userFriendlyIndex);
                 taskManager.removeTask(userFriendlyIndex);
-                printWithSeparators("Can. I've removed this task:\n" + deletedTask);
+                ui.showTaskDeleted(deletedTask.toString());
             } else {
                 throw new UnknownCommandException();
             }
@@ -138,7 +124,7 @@ public class Clanky {
         case "deadline":
         case "event":
             handleAddTask(parser);
-            printWithSeparators("added: " + taskManager.getLatestTask() + "\nNow you have " + taskManager.size() + " tasks.");
+            ui.showTaskAdded(taskManager.getLatestTask().toString(), taskManager.size());
             break;
         default:
             throw new UnknownCommandException();
@@ -180,18 +166,5 @@ public class Clanky {
             throw new UnknownCommandException();
         }
         taskManager.addTask(newTask);
-    }
-
-    /**
-     * Prints a message to the console with decorative separator lines.
-     * Used to format all output from the Clanky application.
-     *
-     * @param line The message to print between separator lines.
-     */
-    private static void printWithSeparators(String line) {
-        String sep_line = "____________________________________________________________";
-        System.out.println(sep_line);
-        System.out.println(line);
-        System.out.println(sep_line);
     }
 }
