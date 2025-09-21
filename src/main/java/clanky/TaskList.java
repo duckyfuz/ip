@@ -8,13 +8,13 @@ import clanky.tasks.Task;
  * Provides methods to add, remove, retrieve, and query tasks.
  * Uses one-based indexing for user-friendly task numbering.
  */
-public class TaskManager {
+public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
      * Constructs a new TaskManager with an empty task list.
      */
-    TaskManager() {
+    TaskList() {
         tasks = new ArrayList<>();
     }
 

@@ -13,17 +13,17 @@ import clanky.tasks.Task;
  * Manages loading tasks from and saving tasks to a file in the current directory.
  * Uses the tasks.txt file for storage.
  */
-public class PersistenceManager {
-    TaskManager taskManager;
+public class Storage {
+    TaskList taskList;
     private static final String FILE_NAME = "tasks.txt";
 
     /**
      * Constructs a PersistenceManager associated with the given TaskManager.
      *
-     * @param taskManager The TaskManager instance to load data into and save data from.
+     * @param taskList The TaskManager instance to load data into and save data from.
      */
-    PersistenceManager(TaskManager taskManager) {
-        this.taskManager = taskManager;
+    Storage(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     /**
@@ -48,7 +48,7 @@ public class PersistenceManager {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     Task task = Task.fromString(line);
-                    taskManager.addTask(task);
+                    taskList.addTask(task);
                 }
             } catch (Exception e) {
                 System.out.println("Error while loading data from " + filePath);
@@ -64,8 +64,8 @@ public class PersistenceManager {
     public void storeData() {
         Path filePath = getFilePath();
         try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
-            for (int i = 1; i <= taskManager.size(); i++) {
-                Task task = taskManager.getTask(i);
+            for (int i = 1; i <= taskList.size(); i++) {
+                Task task = taskList.getTask(i);
                 writer.write(task.toString());
                 writer.newLine();
             }
