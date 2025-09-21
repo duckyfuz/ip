@@ -1,6 +1,6 @@
 # Clanky User Guide
 
-![Title Im](/docs/title.png)
+![Title Im](https://github.com/duckyfuz/ip/blob/master/docs/title.png)
 
 Clanky is a command-line interface chatbot that helps you manage your tasks efficiently. It supports adding different types of tasks, tracking their completion status, and provides search functionality to find tasks quickly.
 
