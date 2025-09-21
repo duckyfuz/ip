@@ -21,7 +21,7 @@ import clanky.tasks.ToDo;
 public class Clanky {
     private static final String BOT_NAME = "Clanky";
     private static TaskManager taskManager = new TaskManager();
-    private static PersistenceManager persMan = new PersistenceManager(taskManager);
+    private static Storage persMan = new Storage(taskManager);
     private static Ui ui = new Ui(BOT_NAME);
 
     /**

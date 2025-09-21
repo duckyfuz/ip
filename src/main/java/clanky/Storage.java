@@ -13,7 +13,7 @@ import clanky.tasks.Task;
  * Manages loading tasks from and saving tasks to a file in the current directory.
  * Uses the tasks.txt file for storage.
  */
-public class PersistenceManager {
+public class Storage {
     TaskManager taskManager;
     private static final String FILE_NAME = "tasks.txt";
 
@@ -22,7 +22,7 @@ public class PersistenceManager {
      *
      * @param taskManager The TaskManager instance to load data into and save data from.
      */
-    PersistenceManager(TaskManager taskManager) {
+    Storage(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
 
