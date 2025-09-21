@@ -7,7 +7,7 @@ import java.util.Set;
  * Supports parsing commands with flags like /by, /from, and /to for specifying 
  * due dates, start times, and end times respectively.
  */
-public class CommandParser {
+public class Parser {
     private final String command;
 
     public String action;
@@ -23,7 +23,7 @@ public class CommandParser {
      *
      * @param command The raw command string to be parsed.
      */
-    CommandParser (String command) {
+    Parser(String command) {
         this.command = command;
     }
 

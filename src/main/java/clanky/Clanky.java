@@ -70,7 +70,7 @@ public class Clanky {
     private static int handleCommand(String command) throws ClankyException {
         int status = 0;
 
-        CommandParser parser = new CommandParser(command);
+        Parser parser = new Parser(command);
         parser.parseCommand();
 
         switch (parser.action) {
@@ -139,7 +139,7 @@ public class Clanky {
      * @param parser The CommandParser containing the parsed command details.
      * @throws ClankyException If required task details are missing or the command is invalid.
      */
-    private static void handleAddTask(CommandParser parser) throws ClankyException {
+    private static void handleAddTask(Parser parser) throws ClankyException {
         if (parser.detail.isEmpty()) {
             throw new MissingDetailException();
         }
