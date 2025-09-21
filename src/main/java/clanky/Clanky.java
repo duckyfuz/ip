@@ -20,8 +20,8 @@ import clanky.tasks.ToDo;
  */
 public class Clanky {
     private static final String BOT_NAME = "Clanky";
-    private static TaskManager taskManager = new TaskManager();
-    private static Storage persMan = new Storage(taskManager);
+    private static TaskList taskList = new TaskList();
+    private static Storage persMan = new Storage(taskList);
     private static Ui ui = new Ui(BOT_NAME);
 
     /**
@@ -79,14 +79,14 @@ public class Clanky {
             ui.showGoodbye();
             break;
         case "list":
-            if (taskManager.isEmpty()) {
+            if (taskList.isEmpty()) {
                 ui.showEmptyTaskList();
                 break;
             }
             StringBuilder allTasks = new StringBuilder();
-            for (int i = 1; i <= taskManager.size(); i++) {
-                allTasks.append((i)).append(". ").append(taskManager.getTask(i));
-                if (i != taskManager.size()) {
+            for (int i = 1; i <= taskList.size(); i++) {
+                allTasks.append((i)).append(". ").append(taskList.getTask(i));
+                if (i != taskList.size()) {
                     allTasks.append("\n");
                 }
             }
@@ -102,19 +102,19 @@ public class Clanky {
                 userFriendlyIndex = -1;
             }
 
-            if (userFriendlyIndex == -1 || userFriendlyIndex - 1 >= taskManager.size()) {
+            if (userFriendlyIndex == -1 || userFriendlyIndex - 1 >= taskList.size()) {
                 throw new NonExistantTaskError();
             }
 
             if (parser.action.equals("mark")) {
-                taskManager.getTask(userFriendlyIndex).markAsDone();
-                ui.showTaskMarkedDone(taskManager.getTask(userFriendlyIndex).toString());
+                taskList.getTask(userFriendlyIndex).markAsDone();
+                ui.showTaskMarkedDone(taskList.getTask(userFriendlyIndex).toString());
             } else if (parser.action.equals("unmark")) {
-                taskManager.getTask(userFriendlyIndex).markAsNotDone();
-                ui.showTaskMarkedNotDone(taskManager.getTask(userFriendlyIndex).toString());
+                taskList.getTask(userFriendlyIndex).markAsNotDone();
+                ui.showTaskMarkedNotDone(taskList.getTask(userFriendlyIndex).toString());
             } else if (parser.action.equals("delete")) {
-                Task deletedTask = taskManager.getTask(userFriendlyIndex);
-                taskManager.removeTask(userFriendlyIndex);
+                Task deletedTask = taskList.getTask(userFriendlyIndex);
+                taskList.removeTask(userFriendlyIndex);
                 ui.showTaskDeleted(deletedTask.toString());
             } else {
                 throw new UnknownCommandException();
@@ -124,7 +124,7 @@ public class Clanky {
         case "deadline":
         case "event":
             handleAddTask(parser);
-            ui.showTaskAdded(taskManager.getLatestTask().toString(), taskManager.size());
+            ui.showTaskAdded(taskList.getLatestTask().toString(), taskList.size());
             break;
         default:
             throw new UnknownCommandException();
@@ -165,6 +165,6 @@ public class Clanky {
         default:
             throw new UnknownCommandException();
         }
-        taskManager.addTask(newTask);
+        taskList.addTask(newTask);
     }
 }
