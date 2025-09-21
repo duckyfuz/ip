@@ -92,6 +92,13 @@ public class Clanky {
             }
             ui.showTaskList(allTasks.toString());
             break;
+        case "find":
+            if (parser.detail.isEmpty()) {
+                throw new MissingDetailException();
+            }
+            String matchingTasks = taskList.findTasksWithIndices(parser.detail);
+            ui.showSearchResults(matchingTasks);
+            break;
         case "mark":
         case "unmark":
         case "delete":

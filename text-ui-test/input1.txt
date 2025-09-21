@@ -19,4 +19,9 @@ event missing end time /from Mon 2pm
 unknowncommandhere
 delete 1
 delete 100
+todo find all books and read them
+todo think about reading books
+find book
+find nonsence
+find proj
 bye

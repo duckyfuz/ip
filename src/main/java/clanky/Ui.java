@@ -138,4 +138,18 @@ public class Ui {
     public void showTaskAdded(String task, int totalTasks) {
         showMessage("added: " + task + "\nNow you have " + totalTasks + " tasks.");
     }
+
+    /**
+     * Displays the results of a task search.
+     * Shows matching tasks with their original indices from the full task list.
+     *
+     * @param matchingTasks The formatted string containing matching tasks with indices.
+     */
+    public void showSearchResults(String matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            showMessage("No matching tasks found.");
+        } else {
+            showMessage("Here are the matching tasks in your list:\n" + matchingTasks);
+        }
+    }
 }
